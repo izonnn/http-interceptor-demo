@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
+import { HttpService } from './http.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <div class="container mt-5">
+      <button class="btn btn-primary" (click)="getRequest()">Click me - 200 Response Code</button>
+    </div>
+  `,
 })
 export class AppComponent {
   title = 'http-interceptor-demo';
+  constructor(private httpService: HttpService<any>) { }
+
+  getRequest() {
+    this.httpService.get().subscribe();
+  }
 }
