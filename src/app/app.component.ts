@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from './http.service';
 
+
 @Component({
   selector: 'app-root',
   template: `
@@ -11,9 +12,10 @@ import { HttpService } from './http.service';
 })
 export class AppComponent {
   title = 'http-interceptor-demo';
-  constructor(private httpService: HttpService<any>) { }
+
+  constructor(private httpService: HttpService) { }
 
   getRequest() {
-    this.httpService.get().subscribe();
+    this.httpService.get<any>().subscribe();
   }
 }

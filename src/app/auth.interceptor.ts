@@ -13,16 +13,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor() { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(requestToHandle: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // Getting guid form local storage
-    const guid = localStorage.getItem('guid');
+    // Getting token form local storage
+    const token = localStorage.getItem('token');
 
-    // Create headers and set guid header
-    const headers: HttpHeaders = new HttpHeaders().set('guid', guid);
+    // Create headers and set token header
+    const headers: HttpHeaders = new HttpHeaders().set('token', token);
 
     // Clone our request with the new headers because HttpRequests are immutable
-    const authReq = request.clone({ headers });
+    const authReq = requestToHandle.clone({ headers });
 
     // Last step is to return an Observable that will send the request or pass the request to the next interceptor if any
     return next.handle(authReq);

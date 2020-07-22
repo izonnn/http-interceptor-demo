@@ -5,14 +5,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService<T> {
+export class HttpService {
 
   fakeApi: string = 'http://httpstat.us/';
 
-  constructor(private httpService: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  get(): Observable<T> {
+  get<T>(): Observable<T> {
     // Qurey param (200) for get result code 200.
-    return this.httpService.get<T>(`${this.fakeApi}/200`);
+    return this.http.get<T>(`${this.fakeApi}/200`);
   }
 }
